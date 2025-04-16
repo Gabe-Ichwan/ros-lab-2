@@ -27,7 +27,7 @@ class WallFollower(Node):
         elif (front_distance > 3.0) and (side_distance < 2.5):
             twist.linear.x = 10.0  # Move forward
         elif (side_distance > 2.5):
-            twist.linear.x = 1.0  # Move forward
+            twist.linear.x = 1.0  # Move forward and turn if left wall distant
             twist.angular.z = 0.3
 
         self.cmd_vel_pub.publish(twist)
