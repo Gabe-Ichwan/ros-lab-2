@@ -60,7 +60,8 @@ def generate_launch_description():
         parameters=[
             {'use_sim_time': True},
             {'robot_description': robot_desc},
-        ]
+        ],
+        namespace='gabespace'
     )
     
     # Visualize in RViz
@@ -68,7 +69,8 @@ def generate_launch_description():
        package='rviz2',
        executable='rviz2',
        arguments=['-d', os.path.join(pkg_project_bringup, 'config', 'diff_drive.rviz')],
-       condition=IfCondition(LaunchConfiguration('rviz'))
+       condition=IfCondition(LaunchConfiguration('rviz')),
+       namespace='gabespace'
     )
 
     # Bridge ROS topics and Gazebo messages for establishing communication
@@ -79,7 +81,8 @@ def generate_launch_description():
             'config_file': os.path.join(pkg_project_bringup, 'config', 'ros_gz_bridge.yaml'),
             'qos_overrides./tf_static.publisher.durability': 'transient_local',
         }],
-        output='screen'
+        output='screen',
+        namespace='gabespace'
     )
 
     return LaunchDescription([
